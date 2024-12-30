@@ -35,9 +35,14 @@ class ApartmentController extends Controller
         return response()->json(["success"=> 1, "apartmentId"=> $path], 200);
     }
     public function update(Request $request) {
+        if ($request->file('image')){
+            $img_path = $request->file('image')->store('apartments', 'public');
+            $img_path = asset('storage/'.$img_path);
+        }
+        else {
+            $img_path = $request->input('image');
+        }
         
-        $img_path = $request->file('image')->store('apartments', 'public');
-        $img_path = asset('storage/'.$img_path);
        
 
         $data = [
@@ -53,20 +58,12 @@ class ApartmentController extends Controller
         
         $apartment->update($data);
         $id = $apartment->id;
-        return response()->json(["success"=> 1, "apartmentId"=> $id], 200);
+        return response()->json(["success"=> 1, "apartmentId"=> $data], 200);
     }
     public function delete(Request $request) {
         
-      
+       $apartment = Apartment::find($request->input('id'));
        
-
-        $data = [
-            'id' => $request->input('id'),
-            
-        ];
-        
-       $apartment = Apartment::findOrFail($data['id']);
-        
        if($apartment){
         $apartment->delete();
        };

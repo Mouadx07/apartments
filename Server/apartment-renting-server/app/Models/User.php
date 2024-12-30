@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Booking;
 use App\Models\Apartment;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -53,4 +54,8 @@ class User extends Authenticatable
     public function apartments(){
         return $this->hasMany(Apartment::class);
     }
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
+    
 }

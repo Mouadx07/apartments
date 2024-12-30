@@ -78,7 +78,7 @@ export const listApartment = async (data) => {
 }
 export const editApartment = async (data) => {
   try {
-    return await postData('apartments/store', data);
+    return await postData('apartments/update', data);
   }
   catch (error) {
     return 'error' + error;
@@ -92,9 +92,17 @@ export const deleteApartment = async (id) => {
     return 'error' + error;
   }
 }
-
-export const getUserApartments = async (userId) => {
-  return await getData(`user/${userId}/apartments`, {userId});
+export const getUserProfile = async (userId) => {
+  return await getData(`user/${userId}/profile`, {userId});
 }
+export const book = async (data) => {
+  return await postData('book', data);
+}
+// export const getUserApartments = async (userId) => {
+//   return await getData(`user/${userId}/apartments`, {userId});
+// }
+// export const getUserBookings = async (userId) => {
+//   return await getData(`user/${userId}/bookings`, {userId});
+// }
  //console.log(await signUpApi('Mouad', 'mouad7@gmail.com', '+212642531245', 'pass12345'))
  //console.log((await logInApi('mouad4@gmail.com', '123456')).token)

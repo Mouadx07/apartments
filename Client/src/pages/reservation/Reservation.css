@@ -49,3 +49,16 @@
 #price {
     margin-left: auto;
 }
+.book {
+    
+    display: flex;
+    align-items: center;
+    
+}
+.nights label{
+    font-size: 23px;
+}
+.book input {
+    width: 40px;
+    display: f;
+}

@@ -11,6 +11,7 @@ import Signup from './pages/login_signup/Signup';
 import Login from './pages/login_signup/Login';
 import Reservation from './pages/reservation/Reservation';
 import ProtectedRoute from './utils/ProtectedRoute';
+import EditListing from './pages/create_listing/EditListing';
 function App() {
   
 
@@ -24,8 +25,10 @@ function App() {
             <Route path="signup" element={<Signup/>} />
             <Route path="login" element={<Login/>} />
              <Route path="" element={<ProtectedRoute/>} >
-             <Route path="profile" element={<Profile />} />
-             <Route path="profile/create-listing" element={<CreateListing/>} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="profile/create-listing" element={<CreateListing/>} />
+              <Route path="profile/edit-listing/:id" element={<EditListing/>} />
+
              </Route>
             
             <Route path="apartment/:id" element={<Reservation />} />

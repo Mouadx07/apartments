@@ -84,7 +84,7 @@ const Apartments = () => {
   useEffect(()=>{
     const data = getAllApartments().then(data=>{
       setListings(data.apartments)
-      console.log(data.apartments[0].user)
+      //console.log(data.apartments[0].user)
     })
     //setListings(data);
     
@@ -104,7 +104,7 @@ const Apartments = () => {
     <h2>Discover Apartments </h2>
     <div className="listings-container">
      
-      {listings.map((listing)=><Listing  img={listing.image} renter={listing.user.name} price={listing.price} available={listing.available} address={listing.address} onClick={() => handleCardClick(listing)}/>)}
+      {listings.map((listing, i)=><Listing key={i} img={listing.image} renter={listing.user.name} price={listing.price} available={listing.available} address={listing.address} onClick={() => handleCardClick(listing)}/>)}
       
       
 

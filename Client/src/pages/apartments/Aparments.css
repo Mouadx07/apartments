@@ -10,7 +10,7 @@
 
 @media (max-width: 600px) {
     .listings-container {
-      grid-template-columns: 1fr; /* For smaller screens, display one listing per row */
+      grid-template-columns: 1fr; 
     }
   }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useContext } from 'react';
+import { useState, useContext, useRef } from 'react';
 import './CreateListing.css'
 import { MdAddPhotoAlternate } from "react-icons/md";
 import { AuthContext } from '../../context/AuthContext';
@@ -47,6 +47,7 @@ const CreateListing = () => {
   const [listingData, setlistingData] = useState({address: '', rooms: '', price:''})
   const [errorMsg, setErrorMsg] = useState("")
   const {userId} = useContext(AuthContext);
+  const {imgInputRef} = useRef();
   const navigate = useNavigate()
   function handleImgChange(e) {
     const file = e.target.files[0];
@@ -94,24 +95,24 @@ const CreateListing = () => {
       <h1>Add new listing!</h1>
 
       <form action="" className="listing-form" onSubmit={handleSubmit}>
-        {/* <img src={file} /> */}
+        {<input ref={imgInputRef} id="file-upload" type="file" accept='image' name="image" onChange={handleImgChange}/>}
         {!image ? (
           <div className='box upload' id="img-upload" onClick={() => document.getElementById('file-upload').click()}>
-            <input id="file-upload" type="file" accept='image' name="image" onChange={handleImgChange}/>
+            
             <div className="upload-text">
               <MdAddPhotoAlternate size='1.5em' className='upload-icon'/> 
             </div>
           </div>
         ) : (
-          <div className="uploaded-image">
+          <div className="uploaded-image" onClick={() => document.getElementById('file-upload').click()}>
             <img src={imageView} alt="Uploaded" />
           </div>
         )}
         
-        <label for="city-select">Choose a city:</label>
+        <label htmlFor="city-select">Choose a city:</label>
         <select name="address" value={listingData.address.value} onChange={handleChange} id="city-select" required>
           <option value="">Please choose an option--</option>
-          {cities.map(city=><option  value={city}>{city}</option>)}
+          {cities.map((city, i)=><option key={i} value={city}>{city}</option>)}
         </select>
        
         <label htmlFor="rooms">Number of Rooms: </label>

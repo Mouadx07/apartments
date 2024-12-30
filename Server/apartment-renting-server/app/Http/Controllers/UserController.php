@@ -72,20 +72,39 @@ class UserController extends Controller
          
             return response()->json(["Msg" =>$user],200);
         }
-        final public function apartments(Request $request) {
+        final public function profile(Request $request) {
             
     
             $id = $request->route('id');
-            //Auth::logout();
-            $user = User::findOrFail($id);
+            $user = User::find($id);//->load('apartments')->load('bookings');//->bookings()->with('apartment')->get();
             $data = [
-                'user'=> $user,
-
-                'apartments'=>$user->apartments,
+                'user'=> $user,//->makeHiddren('apartments', 'bookings'),
+                 'apartments'=>$user->apartments()->get(),
+                 'bookings'=>$user->bookings()->with('apartment')->get(),
                 
             ];
-            return response()->json(["result" =>$data],200);
+            return response()->json(["result" => $data],200);
         }
+        // final public function bookings(Request $request) {
+            
+    
+        //     $id = $request->route('id');
+        //     //Auth::logout();
+        //     $user = User::findOrFail($id);
+        //     $data = [
+                
+                
+        //     ];
+        //     return response()->json(["result" =>$data],200);
+        // }
+        // final public function profile(Request $request) {
+            
+    
+        //     $id = $request->route('id');
+        //     //Auth::logout();
+        //     $user = User::findOrFail($id);
+        //     return response()->json(["user" =>$user],200);
+        // }
     
 }
 
